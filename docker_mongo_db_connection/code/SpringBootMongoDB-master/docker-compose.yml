@@ -1,0 +1,15 @@
+version: '2'
+services:
+  mongodb:
+#    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+  web:
+    image: springbootmongo
+    depends_on: # schools-datastore will be started before the schools-service
+      - mongodb
+    ports:
+      - "8080:8080"
+    command: docker run --name springdb --link techmongo:mongo -d springbootmongo
+    command: docker run -it --link some-mongo:mongo --rm mongo sh -c 'exec mongo "$MONGO_PORT_27017_TCP_ADDR:$MONGO_PORT_27017_TCP_PORT/test"'

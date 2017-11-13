@@ -1,0 +1,58 @@
+eureka-server:
+    image: eureka-server
+    ports:
+     - "8761:8761"
+sumcalc:
+  image: sumcalc
+  hostname: sumcalc
+  links:
+    - eureka-server
+  environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+     SERVER_PORT: 9099
+     SPRING_PROFILES_ACTIVE: docker
+  ports:
+    - "9099:9099"
+crudoperations:
+  image: crudoperations
+  hostname: crudoperations
+  links:
+    - eureka-server
+  environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+     SERVER_PORT: 8089
+     SPRING_PROFILES_ACTIVE: docker
+  ports:
+    - "8089:8089"
+samplemonitor:
+  image: sample-hystrix-monitor
+  hostname: samplemonitor
+  links:
+    - eureka-server
+#    - sampleservice
+    - crudoperations
+    - sumcalc
+  environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+     SERVER_PORT: 8989
+     SPRING_PROFILES_ACTIVE: docker
+  ports:
+    - "8989:8989"
+zuul-server:
+  image: zuul-server
+  hostname: zuul-server
+  links:
+    - eureka-server
+#    - sampleservice
+    - crudoperations
+    - sumcalc
+  environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+     SERVER_PORT: 9090
+     SPRING_PROFILES_ACTIVE: docker
+  ports:
+    - "9090:9090"

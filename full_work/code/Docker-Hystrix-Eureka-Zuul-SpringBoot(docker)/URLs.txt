@@ -1,0 +1,27 @@
+
+http://192.168.99.100:8761/
+
+http://192.168.99.100:8989/hystrix
+
+http://192.168.99.100:8989/turbine.stream?cluster=DB-OPERATION-SERVICE
+
+
+
+
+
+http://192.168.99.100:9097/insert
+
+-----------
+
+http://192.168.99.100:8080/db-operation-service/insert
+
+http://192.168.99.100:8989/turbine.stream?cluster=db-operation-service
+
+
+
+
+ab -n 2000 -c 30 "http://192.168.99.100:8080/db-operation-service/insert"
+
+
+
+

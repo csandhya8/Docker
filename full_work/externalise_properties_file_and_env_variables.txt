@@ -1,0 +1,16 @@
+app:
+  image: springdb
+  ports:
+    - "8181:8181"
+	
+#store env variable in a remote file(/home/ubuntu/mysql.env) without configuring in docker-compose
+  env_file:
+    - /home/ubuntu/mysql.env
+	
+#passing env variable directly in docker-compose
+  environment:
+    - mysqlhost=54.144.52.182
+	
+#keeping application.properties outside the docker image in /home/ubuntu/springbootmysql folder
+  volumes:
+    - /home/ubuntu/springbootmysql:/config

@@ -1,0 +1,29 @@
+---
+spring:
+  application:
+    name: crudoperations
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        serviceId: SAMPLE-HYSTRIX-CONFIG
+
+eureka:
+  instance:
+    nonSecurePort: ${server.port:8089}
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+	  
+zuul:
+  routes:
+    echo:
+      path: /echo/**
+      url: http://echo-service:9098/ 
+    crud:
+      path: /crud/**
+      url: http://crud-service:9099/
+    hystrix:
+      path: /hystrix/**
+      url: http://hystrix-monitor:8989/

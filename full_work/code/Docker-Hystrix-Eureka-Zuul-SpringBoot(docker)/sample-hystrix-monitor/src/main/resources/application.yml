@@ -1,0 +1,12 @@
+---
+server:
+  port: 8989
+
+
+turbine:
+  aggregator:
+    clusterConfig: CRUDOPERATIONS,SUMCALC
+  appConfig: CRUDOPERATIONS,SUMCALC
+
+logging:
+  level: INFO

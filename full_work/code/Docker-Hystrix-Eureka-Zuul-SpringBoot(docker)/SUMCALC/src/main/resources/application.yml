@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+sampleservice:
+  ribbon:
+    DeploymentContextBasedVipAddresses: sumcalc
+    ReadTimeout: 10000
+    MaxAutoRetries: 2
+
+hystrix:
+  command:
+    RemoteMessageClientCommand:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    RemoteMessageAnnotationClient:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
